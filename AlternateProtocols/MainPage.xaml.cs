@@ -15,9 +15,6 @@ namespace AlternateProtocols
         {
             this.protocolsService = _protocolsService;
             InitializeComponent();
-
-
-
             BindingContext = this;
         }
 
@@ -86,7 +83,7 @@ namespace AlternateProtocols
                     originalGroup.IsCollapsed = isNowCollapsed;
                     Debug.WriteLine($"Tapped on {protocolGroup.GroupName}. isNowCollapsed: {isNowCollapsed}");
                     CollapseProtocols(isNowCollapsed, protocolGroup, originalGroup);
-                    ForceUIUpadteAsync();
+                    //ForceUIUpadteAsync();
                 }
                 
                 //Debug.WriteLine($"ProtocolCategory_Tapped({protocolGroup.GroupName}) finished execution in {stopwatch.ElapsedMilliseconds}ms.");
@@ -97,16 +94,16 @@ namespace AlternateProtocols
             }
         }
 
-        private async void ForceUIUpadteAsync()
-        {
-            await Task.Delay(3000);
-            Debug.WriteLine("ForceUIUpadteAsync() called.");
+        //private async void ForceUIUpadteAsync()
+        //{
+        //    await Task.Delay(3000);
+        //    Debug.WriteLine("ForceUIUpadteAsync() called.");
 
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
-                Debug.WriteLine($"ForceUIUpadteAsync() called on MainThread.");
-                protocolListView.InvalidateMeasureNonVirtual(Microsoft.Maui.Controls.Internals.InvalidationTrigger.SizeRequestChanged);
-            });
-        }
+        //    MainThread.BeginInvokeOnMainThread(() =>
+        //    {
+        //        Debug.WriteLine($"ForceUIUpadteAsync() called on MainThread.");
+        //        protocolListView.InvalidateMeasureNonVirtual(Microsoft.Maui.Controls.Internals.InvalidationTrigger.SizeRequestChanged);
+        //    });
+        //}
     }
 }
