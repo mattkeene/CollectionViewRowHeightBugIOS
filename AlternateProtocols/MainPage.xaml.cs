@@ -1,5 +1,6 @@
 ﻿using AlternateProtocols.Models;
 using AlternateProtocols.Services;
+using Microsoft.Maui.Controls.Handlers.Items;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
@@ -33,7 +34,6 @@ namespace AlternateProtocols
         {
             if (FullProtocols == null)
             {
-                await protocolsService.GetProtocolsFromConfigAsync();
                 FullProtocols = protocolsService.GetProtocolGroupList();
                 foreach (var protocolGroup in FullProtocols)
                 {
@@ -45,40 +45,68 @@ namespace AlternateProtocols
                         AllProtocols.Add(newGroup);
                     }
                 }
+                Debug.WriteLine("InitProtocols() finished execution. Status of FullProtocols:");
+                foreach (var protocolGroup in FullProtocols)
+                {
+                    Debug.WriteLine(protocolGroup.ToString());
+                }
             }
 
         }
 
-        private static void CollapseProtocols(bool isNowCollapsed, ProtocolGroup groupToCollapse, ProtocolGroup originalGroup)
+        private void CollapseProtocols(bool isNowCollapsed, ProtocolGroup groupToCollapse, ProtocolGroup originalGroup)
         {
+            //protocolListView.ItemsSource = null;
             if (isNowCollapsed)
             {
                 groupToCollapse.IsCollapsed = true;
-                groupToCollapse.Clear();
+                //while (groupToCollapse.Count > 0) groupToCollapse.RemoveAt(0); // This is needed for Android to work around a known issue
+                groupToCollapse.Clear(); // Thsi is needed for iOS
             }
             else
             {
+                Debug.WriteLine($"Adding to list: \n {originalGroup.ToString()}");
                 groupToCollapse.IsCollapsed = false;
                 groupToCollapse.AddRange(originalGroup.ToList<Protocol>());
             }
+            //protocolListView.ItemsSource = AllProtocols;
+            Debug.WriteLine($"CollapseProtocols() finished execution on {groupToCollapse.GroupName}; isNowCollapsed: {isNowCollapsed}; MainThread: {MainThread.IsMainThread}");
         }
 
         private void ProtocolCategory_Tapped(object sender, EventArgs e)
         {
-            Debug.WriteLine("ProtocolCategory_Tapped() called.");
+            Debug.WriteLine($"ProtocolCategory_Tapped() called. MainThread: {MainThread.IsMainThread}");
+            //var stopwatch = Stopwatch.StartNew();
             if (sender is Grid grid && grid.BindingContext is ProtocolGroup protocolGroup)
             {
-                var originalGroup = FullProtocols.FirstOrDefault(g => g.GroupName == protocolGroup.GroupName);
+                var originalGroup = FullProtocols?.FirstOrDefault(g => g.GroupName == protocolGroup.GroupName);
                 if (originalGroup != null)
                 {
                     bool isNowCollapsed = !originalGroup.IsCollapsed;
                     originalGroup.IsCollapsed = isNowCollapsed;
-
+                    Debug.WriteLine($"Tapped on {protocolGroup.GroupName}. isNowCollapsed: {isNowCollapsed}");
                     CollapseProtocols(isNowCollapsed, protocolGroup, originalGroup);
+                    ForceUIUpadteAsync();
                 }
+                
+                //Debug.WriteLine($"ProtocolCategory_Tapped({protocolGroup.GroupName}) finished execution in {stopwatch.ElapsedMilliseconds}ms.");
+            }
+            if (DeviceInfo.Platform == DevicePlatform.iOS)
+            {
+                //ForceUIUpadteAsync();
             }
         }
 
-    }
+        private async void ForceUIUpadteAsync()
+        {
+            await Task.Delay(3000);
+            Debug.WriteLine("ForceUIUpadteAsync() called.");
 
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                Debug.WriteLine($"ForceUIUpadteAsync() called on MainThread.");
+                protocolListView.InvalidateMeasureNonVirtual(Microsoft.Maui.Controls.Internals.InvalidationTrigger.SizeRequestChanged);
+            });
+        }
+    }
 }

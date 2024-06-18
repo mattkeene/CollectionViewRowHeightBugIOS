@@ -8,14 +8,14 @@
   },
   {
     "ProtocolCategory": "Category 1",
-    "ProtocolTitle": "Protocol 2",
+    "ProtocolTitle": "Protocol 2  - An example of an item with a title long enough to span multiple lines",
     "ProtocolDescription": "",
     "ProtocolPath": "path",
     "IsPDF": true
   },
   {
     "ProtocolCategory": "Category 1",
-    "ProtocolTitle": "Protocol 8",
+    "ProtocolTitle": "Protocol 8 - An example of an item with a title long enough to span multiple lines",
     "ProtocolDescription": "",
     "ProtocolPath": "path",
     "IsPDF": true
@@ -42,36 +42,36 @@
     "IsPDF": true
   },
   {
-    "ProtocolCategory": "Category 3",
+    "ProtocolCategory": "Category 3 - An example of a category with a title long enough to span multiple lines",
     "ProtocolTitle": "Protocol 9",
     "ProtocolDescription": "",
     "ProtocolPath": "path",
     "IsPDF": true
   },
   {
-    "ProtocolCategory": "Category 3",
+    "ProtocolCategory": "Category 3 - An example of a category with a title long enough to span multiple lines",
     "ProtocolTitle": "Protocol 3",
     "ProtocolDescription": "",
     "ProtocolPath": "path",
     "IsPDF": true
   },
   {
-    "ProtocolCategory": "Category 3",
+    "ProtocolCategory": "Category 3 - An example of a category with a title long enough to span multiple lines",
     "ProtocolTitle": "Protocol 1",
     "ProtocolDescription": "",
     "ProtocolPath": "path",
     "IsPDF": true
   },
   {
-    "ProtocolCategory": "Category 3",
+    "ProtocolCategory": "Category 3 - An example of a category with a title long enough to span multiple lines",
     "ProtocolTitle": "Protocol 4",
     "ProtocolDescription": "",
     "ProtocolPath": "path",
     "IsPDF": true
   },
   {
-    "ProtocolCategory": "Category 3",
-    "ProtocolTitle": "Protocol 4",
+    "ProtocolCategory": "Category 3 - An example of a category with a title long enough to span multiple lines",
+    "ProtocolTitle": "Protocol 4  - An example of an item with a title long enough to span multiple lines",
     "ProtocolDescription": "",
     "ProtocolPath": "path",
     "IsPDF": true
@@ -106,21 +106,21 @@
   },
   {
     "ProtocolCategory": "Category 5",
-    "ProtocolTitle": "Protocol 9",
+    "ProtocolTitle": "Protocol 9  - An example of an item with a title long enough to span multiple lines",
     "ProtocolDescription": "",
     "ProtocolPath": "path",
     "IsPDF": true
   },
   {
     "ProtocolCategory": "Category 6",
-    "ProtocolTitle": "Protocol 1",
+    "ProtocolTitle": "Protocol 1  - An example of an item with a title long enough to span multiple lines",
     "ProtocolDescription": "",
     "ProtocolPath": "path",
     "IsPDF": true
   },
   {
     "ProtocolCategory": "Category 6",
-    "ProtocolTitle": "Protocol 3",
+    "ProtocolTitle": "Protocol 3  - An example of an item with a title long enough to span multiple lines",
     "ProtocolDescription": "",
     "ProtocolPath": "path",
     "IsPDF": true

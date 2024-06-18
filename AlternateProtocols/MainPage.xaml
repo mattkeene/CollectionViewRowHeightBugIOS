@@ -6,27 +6,33 @@
     <CollectionView x:Name="protocolListView"
               ItemsSource="{Binding AllProtocols}"
               SelectionMode="None"
-              IsGrouped="True">
+              IsGrouped="True"
+              ItemSizingStrategy="MeasureAllItems"
+                    >
         <CollectionView.GroupHeaderTemplate>
             <DataTemplate>
-                <Grid>
+                <Grid
+                    BackgroundColor="Navy">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="1" />
+                    </Grid.RowDefinitions>
                     <Grid.GestureRecognizers>
                         <TapGestureRecognizer Tapped="ProtocolCategory_Tapped" />
                     </Grid.GestureRecognizers>
                     <Label
                         Text="{Binding GroupName}"
                         LineBreakMode="WordWrap"
-                        BackgroundColor="Blue"
+                        FontAttributes="Bold"
                         TextColor="White"
                         FontSize="18"
-                        Padding="10, 5, 0, 10"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand"
-                        Grid.Column="0"/>
+                        Padding="15, 10, 0, 10"
+                        Grid.Column="0"
+                        Grid.Row="0"/>
                     <Label 
                         Text="{Binding GroupDropdownText}"
                         FontFamily=""
@@ -34,21 +40,34 @@
                         Padding="5,0,5,5"
                         TextColor="White"
                         HorizontalOptions="End"
-                        VerticalOptions="Center" />
+                        VerticalOptions="Center" 
+                        Grid.Column="1"
+                        Grid.Row="0"/>
+                    <BoxView HeightRequest="1"
+                             BackgroundColor="Gray"
+                            Grid.ColumnSpan="2"
+                            Grid.Row="1"/>
                 </Grid>
             </DataTemplate>
         </CollectionView.GroupHeaderTemplate>
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <Label
-                    Text="{Binding ProtocolTitle}"
-                    FontSize="16"
-                    LineBreakMode="WordWrap"
-                    Padding="30, 10, 15, 10"
-                    HorizontalOptions="FillAndExpand"
-                    VerticalOptions="FillAndExpand"
-                    >
-                </Label>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="1" />
+                    </Grid.RowDefinitions>
+                    <Label
+                        Text="{Binding ProtocolTitle}"
+                        FontSize="16"
+                        LineBreakMode="WordWrap"
+                        Padding="30, 10, 15, 10"
+                        Grid.Row="0"
+                        />
+                    <BoxView HeightRequest="1"
+                             BackgroundColor="LightBlue"
+                             Grid.Row="1"/>
+                </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>

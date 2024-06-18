@@ -53,7 +53,9 @@ namespace AlternateProtocols.Services
                     }
                     group.Add(protocol);
                 }
-                Debug.WriteLine($"ProtocolGroupList created with {ProtocolGroupList.Count} protocols. AllProtocols contains {AllProtocols.Count} protocols.");
+                Debug.WriteLine($"ProtocolGroupList created with {ProtocolGroupList.Count} groups. AllProtocols contains {AllProtocols.Count} protocols.");
+                Debug.WriteLine("ProtocolGroupList contents:");
+                foreach (var group in ProtocolGroupList) Debug.WriteLine(group.ToString());
             }
             else
             {

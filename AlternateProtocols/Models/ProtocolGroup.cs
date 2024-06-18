@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace AlternateProtocols.Models
 {
-    public class ProtocolGroup : ObservableRangeCollection<Protocol>, INotifyPropertyChanged
+    public class ProtocolGroup : ObservableRangeCollection<Protocol>
     {
         public string GroupName { get; private set; }
         
@@ -12,7 +12,13 @@ namespace AlternateProtocols.Models
         public string GroupDropdownText
         {
             get => groupDropdownText;
-            set => SetProperty(ref groupDropdownText, value);
+            //set => SetProperty(ref groupDropdownText, value);
+            set
+            {
+                if (groupDropdownText == value) return;
+                groupDropdownText = value;
+                OnPropertyChanged(new(nameof(GroupDropdownText)));
+            }
         }
 
         private bool isCollapsed;
@@ -21,7 +27,10 @@ namespace AlternateProtocols.Models
             get => isCollapsed;
             set
             {
-                SetProperty(ref isCollapsed, value);
+                //SetProperty(ref isCollapsed, value);
+                if (isCollapsed == value) return;
+                isCollapsed = value;
+                OnPropertyChanged(new(nameof(IsCollapsed)));
                 GroupDropdownText = DropdownText;
             }
         }
@@ -44,22 +53,22 @@ namespace AlternateProtocols.Models
             return text;
         }
 
-        protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName] string propertyName = "", Action? onChanged = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(backingStore, value))
-                return false;
+        //protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName] string propertyName = "", Action? onChanged = null)
+        //{
+        //    if (EqualityComparer<T>.Default.Equals(backingStore, value))
+        //        return false;
 
-            backingStore = value;
-            onChanged?.Invoke();
-            OnPropertyChanged(propertyName);
-            return true;
-        }
+        //    backingStore = value;
+        //    onChanged?.Invoke();
+        //    OnPropertyChanged(propertyName);
+        //    return true;
+        //}
 
-        public new event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        //public new event PropertyChangedEventHandler? PropertyChanged;
+        //protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        //}
        
     }
 }
